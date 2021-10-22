@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { AuthenticateUserController } from '../controller/AuthenticateUserController';
+import { CreateMessageController } from '../controller/CreateMessageController';
+import { ensureAuthenticated } from '../middlewares/EnsureAuthenticated';
 
 const router = Router();
 
@@ -18,6 +20,11 @@ router.get('/signin/callback', (request, response) => {
 
 })
 
+// Rota de Autenticação
 router.post('/authenticate', new AuthenticateUserController().handle)
+
+// Rota de Envio de Mensagens
+router.post('/messages', ensureAuthenticated, new CreateMessageController().handle)
+
 
 export { router }
