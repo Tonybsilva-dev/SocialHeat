@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { AuthenticateUserController } from '../controller/AuthenticateUserController';
 import { CreateMessageController } from '../controller/CreateMessageController';
+import { GetLast3MessagesController } from '../controller/GetLast3MessagesController';
+import { ProfileUserController } from '../controller/ProfileUserController';
 import { ensureAuthenticated } from '../middlewares/EnsureAuthenticated';
 
 const router = Router();
@@ -26,5 +28,10 @@ router.post('/authenticate', new AuthenticateUserController().handle)
 // Rota de Envio de Mensagens
 router.post('/messages', ensureAuthenticated, new CreateMessageController().handle)
 
+// Rota de Busca de Mensagens
+router.get('/messages/last3', ensureAuthenticated, new GetLast3MessagesController().handle)
+
+// Rota de Perfil do Usuario
+router.get('/profile', ensureAuthenticated, new ProfileUserController().handle);
 
 export { router }
