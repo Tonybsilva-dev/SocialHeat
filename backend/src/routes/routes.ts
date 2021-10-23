@@ -29,7 +29,7 @@ router.post('/authenticate', new AuthenticateUserController().handle)
 router.post('/messages', ensureAuthenticated, new CreateMessageController().handle)
 
 // Rota de Busca de Mensagens
-router.get('/messages/last3', ensureAuthenticated, new GetLast3MessagesController().handle)
+router.get('/messages/last3', new GetLast3MessagesController().handle)
 
 // Rota de Perfil do Usuario
 router.get('/profile', ensureAuthenticated, new ProfileUserController().handle);
